@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Beneficiary - Digital Legacy System</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #dbeafe 0%,
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    #ede9fe 0%,
+                    transparent 35%
+                ),
+                #f8fafc;
+
+            color: #1e293b;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+
+            width: 100%;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border-bottom: 1px solid #e2e8f0;
+
+            padding: 16px 6%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            box-shadow:
+                0 4px 20px rgba(15, 23, 42, 0.05);
+        }
+
+
+        .logo {
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-size: 22px;
+
+            font-weight: 800;
+        }
+
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .nav-links a {
+
+            text-decoration: none;
+
+            color: #475569;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            padding: 9px 13px;
+
+            border-radius: 8px;
+
+            transition: 0.2s;
+        }
+
+
+        .nav-links a:hover {
+
+            background: #eff6ff;
+
+            color: #2563eb;
+        }
+
+
+        .logout {
+
+            color: #dc2626 !important;
+        }
+
+
+        .logout:hover {
+
+            background: #fef2f2 !important;
+
+            color: #b91c1c !important;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+
+            width: 92%;
+
+            max-width: 850px;
+
+            margin: 45px auto;
+        }
+
+
+        .back-link {
+
+            display: inline-block;
+
+            text-decoration: none;
+
+            color: #2563eb;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 18px;
+        }
+
+
+        .back-link:hover {
+
+            text-decoration: underline;
+        }
+
+
+        .page-title {
+
+            margin-bottom: 25px;
+        }
+
+
+        .page-title h1 {
+
+            color: #0f172a;
+
+            font-size: 32px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .page-title p {
+
+            color: #64748b;
+
+            font-size: 15px;
+        }
+
+
+        /* ================= FLASH ================= */
+
+        .flash-container {
+
+            margin-bottom: 20px;
+        }
+
+
+        .flash {
+
+            padding: 13px 16px;
+
+            border-radius: 10px;
+
+            margin-bottom: 10px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        .success {
+
+            background: #dcfce7;
+
+            color: #166534;
+
+            border: 1px solid #bbf7d0;
+        }
+
+
+        .error {
+
+            background: #fee2e2;
+
+            color: #991b1b;
+
+            border: 1px solid #fecaca;
+        }
+
+
+        .warning {
+
+            background: #fef3c7;
+
+            color: #92400e;
+
+            border: 1px solid #fde68a;
+        }
+
+
+        .info {
+
+            background: #dbeafe;
+
+            color: #1e40af;
+
+            border: 1px solid #bfdbfe;
+        }
+
+
+        /* ================= FORM CARD ================= */
+
+        .form-card {
+
+            background: rgba(255, 255, 255, 0.97);
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 18px;
+
+            padding: 32px;
+
+            box-shadow:
+                0 12px 35px rgba(15, 23, 42, 0.07);
+        }
+
+
+        .form-header {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding-bottom: 24px;
+
+            margin-bottom: 25px;
+
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+
+        .beneficiary-icon {
+
+            width: 55px;
+
+            height: 55px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            border-radius: 13px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 25px;
+        }
+
+
+        .form-header h2 {
+
+            color: #0f172a;
+
+            font-size: 20px;
+        }
+
+
+        .form-header p {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-top: 4px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-group {
+
+            margin-bottom: 21px;
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #334155;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        .required {
+
+            color: #dc2626;
+        }
+
+
+        input,
+        select {
+
+            width: 100%;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 10px;
+
+            padding: 13px 14px;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            color: #0f172a;
+
+            background: white;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+
+        input:focus,
+        select:focus {
+
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+
+        .help-text {
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            margin-top: 6px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ================= RELATION ================= */
+
+        .relation-options {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 10px;
+        }
+
+
+        .relation-option {
+
+            background: #f1f5f9;
+
+            color: #475569;
+
+            padding: 6px 10px;
+
+            border-radius: 7px;
+
+            font-size: 11px;
+        }
+
+
+        /* ================= SECURITY ================= */
+
+        .security-note {
+
+            margin-top: 22px;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            background: #f0fdf4;
+
+            border: 1px solid #bbf7d0;
+
+            color: #166534;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+
+        /* ================= BUTTONS ================= */
+
+        .button-row {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 28px;
+        }
+
+
+        .save-btn,
+        .cancel-btn {
+
+            flex: 1;
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 13px 18px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            transition: 0.2s;
+        }
+
+
+        .save-btn {
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            box-shadow:
+                0 8px 20px rgba(37, 99, 235, 0.20);
+        }
+
+
+        .save-btn:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 25px rgba(37, 99, 235, 0.28);
+        }
+
+
+        .cancel-btn {
+
+            color: #475569;
+
+            background: #f1f5f9;
+        }
+
+
+        .cancel-btn:hover {
+
+            background: #e2e8f0;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+
+            text-align: center;
+
+            padding: 35px 20px;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+
+                padding: 14px 4%;
+            }
+
+
+            .nav-links a {
+
+                font-size: 12px;
+
+                padding: 8px;
+            }
+
+
+            .nav-links a:nth-child(2),
+            .nav-links a:nth-child(3) {
+
+                display: none;
+            }
+
+
+            .container {
+
+                width: 94%;
+
+                margin: 30px auto;
+            }
+
+
+            .page-title h1 {
+
+                font-size: 27px;
+            }
+
+
+            .form-card {
+
+                padding: 22px;
+            }
+
+
+            .button-row {
+
+                flex-direction: column;
+            }
+        }
+
+
+        @media (max-width: 450px) {
+
+            .logo {
+
+                font-size: 18px;
+            }
+
+
+            .form-header {
+
+                align-items: flex-start;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="logo"
+        >
+            🔐 Digital Legacy
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('beneficiaries') }}">
+                Beneficiaries
+            </a>
+
+            <a href="{{ url_for('profile') }}">
+                Profile
+            </a>
+
+            <a
+                href="{{ url_for('logout') }}"
+                class="logout"
+            >
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <a
+            href="{{ url_for('beneficiaries') }}"
+            class="back-link"
+        >
+            ← Back to Beneficiaries
+        </a>
+
+
+        <div class="page-title">
+
+            <h1>Add Beneficiary</h1>
+
+            <p>
+                Add a trusted person who can receive your legacy
+                information in the future.
+            </p>
+
+        </div>
+
+
+        <!-- ================= FLASH MESSAGES ================= -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                <div class="flash-container">
+
+                    {% for category, message in messages %}
+
+                        <div class="flash {{ category }}">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- ================= FORM CARD ================= -->
+
+        <div class="form-card">
+
+
+            <div class="form-header">
+
+                <div class="beneficiary-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <h2>
+                        Beneficiary Information
+                    </h2>
+
+                    <p>
+                        Enter the details of your trusted beneficiary.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= FORM ================= -->
+
+            <form
+                action="{{ url_for('add_beneficiary') }}"
+                method="POST"
+                id="beneficiaryForm"
+                novalidate
+            >
+<!-- CSRF Security Token -->
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="name">
+
+                        Beneficiary Name
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Example: Ahmed Pasha"
+                        minlength="2"
+                        maxlength="100"
+                        autocomplete="name"
+                        required
+                    >
+
+
+                    <div class="help-text">
+
+                        Enter the full name of the person
+                        you want to add as a beneficiary.
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+
+                        Email Address
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="example@gmail.com"
+                        maxlength="100"
+                        autocomplete="email"
+                        required
+                    >
+
+
+                    <div class="help-text">
+
+                        Enter a valid email address
+                        for the beneficiary.
+
+                    </div>
+
+                </div>
+
+
+                <!-- RELATION -->
+
+                <div class="form-group">
+
+                    <label for="relation">
+
+                        Relationship
+
+                        <span class="required">*</span>
+
+                    </label>
+
+
+                    <select
+                        id="relation"
+                        name="relation"
+                        required
+                    >
+
+                        <option value="">
+                            -- Select Relationship --
+                        </option>
+
+                        <option value="Father">
+                            Father
+                        </option>
+
+                        <option value="Mother">
+                            Mother
+                        </option>
+
+                        <option value="Brother">
+                            Brother
+                        </option>
+
+                        <option value="Sister">
+                            Sister
+                        </option>
+
+                        <option value="Spouse">
+                            Spouse
+                        </option>
+
+                        <option value="Son">
+                            Son
+                        </option>
+
+                        <option value="Daughter">
+                            Daughter
+                        </option>
+
+                        <option value="Friend">
+                            Friend
+                        </option>
+
+                        <option value="Relative">
+                            Relative
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+
+                    <div class="help-text">
+
+                        Select the relationship between
+                        you and the beneficiary.
+
+                    </div>
+
+
+                    <div class="relation-options">
+
+                        <span class="relation-option">
+                            Father
+                        </span>
+
+                        <span class="relation-option">
+                            Mother
+                        </span>
+
+                        <span class="relation-option">
+                            Brother
+                        </span>
+
+                        <span class="relation-option">
+                            Sister
+                        </span>
+
+                        <span class="relation-option">
+                            Spouse
+                        </span>
+
+                        <span class="relation-option">
+                            Friend
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="button-row">
+
+                    <a
+                        href="{{ url_for('beneficiaries') }}"
+                        class="cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="save-btn"
+                    >
+                        ✓ Add Beneficiary
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- ================= SECURITY NOTE ================= -->
+
+            <div class="security-note">
+
+                🔒
+
+                <strong>
+                    Security Reminder:
+                </strong>
+
+                Only add people you trust.
+                Beneficiary information is used for
+                your Digital Legacy planning.
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        © 2026 Digital Legacy System.
+        All rights reserved.
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        const form =
+            document.getElementById("beneficiaryForm");
+
+
+        form.addEventListener("submit", function(event) {
+
+            const name =
+                document.getElementById("name")
+                .value
+                .trim();
+
+
+            const email =
+                document.getElementById("email")
+                .value
+                .trim();
+
+
+            const relation =
+                document.getElementById("relation")
+                .value;
+
+
+            /* NAME VALIDATION */
+
+            const namePattern =
+                /^[A-Za-z ]{2,100}$/;
+
+
+            if (!namePattern.test(name)) {
+
+                alert(
+                    "Beneficiary name must contain only letters and spaces."
+                );
+
+                event.preventDefault();
+
+                return;
+            }
+
+
+            /* EMAIL VALIDATION */
+
+            const emailPattern =
+                /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
+
+            if (!emailPattern.test(email)) {
+
+                alert(
+                    "Please enter a valid email address."
+                );
+
+                event.preventDefault();
+
+                return;
+            }
+
+
+            /* RELATION VALIDATION */
+
+            if (relation === "") {
+
+                alert(
+                    "Please select the relationship."
+                );
+
+                event.preventDefault();
+
+                return;
+            }
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

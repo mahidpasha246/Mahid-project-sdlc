@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login - Digital Legacy System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+
+            background:
+                radial-gradient(circle at top left, #dbeafe, transparent 35%),
+                radial-gradient(circle at bottom right, #e0e7ff, transparent 35%),
+                #f8fafc;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .login-card {
+            background: #ffffff;
+
+            padding: 40px 35px;
+
+            border-radius: 20px;
+
+            border: 1px solid #e5e7eb;
+
+            box-shadow:
+                0 20px 50px rgba(15, 23, 42, 0.12);
+        }
+
+        .logo {
+            width: 65px;
+            height: 65px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 18px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #4f46e5
+            );
+
+            color: white;
+
+            font-size: 25px;
+            font-weight: bold;
+
+            box-shadow:
+                0 10px 25px rgba(37, 99, 235, 0.25);
+        }
+
+        h1 {
+            text-align: center;
+
+            color: #111827;
+
+            font-size: 28px;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            color: #6b7280;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #374151;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #d1d5db;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            color: #111827;
+
+            font-size: 14px;
+
+            background: #ffffff;
+
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        input::placeholder {
+            color: #9ca3af;
+        }
+
+        .password-input {
+            padding-right: 48px;
+        }
+
+        .eye-btn {
+            position: absolute;
+
+            right: 10px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 32px;
+            height: 32px;
+
+            border: none;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            color: #6b7280;
+
+            font-size: 18px;
+
+            border-radius: 6px;
+        }
+
+        .eye-btn:hover {
+            background: #f3f4f6;
+
+            color: #2563eb;
+        }
+
+        .form-options {
+            display: flex;
+
+            justify-content: flex-end;
+
+            margin-top: -8px;
+
+            margin-bottom: 22px;
+        }
+
+        .forgot-link {
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-size: 13px;
+
+            font-weight: 600;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                #2563eb,
+                #4f46e5
+            );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 10px 20px rgba(37, 99, 235, 0.20);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+        .register-text {
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+        .register-link {
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .register-link:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 18px;
+
+            color: #6b7280;
+
+            text-decoration: none;
+
+            font-size: 13px;
+        }
+
+        .back-link:hover {
+            color: #2563eb;
+        }
+
+        .alert {
+            padding: 12px 14px;
+
+            border-radius: 9px;
+
+            margin-bottom: 18px;
+
+            font-size: 13px;
+
+            line-height: 1.5;
+        }
+
+        .alert-success {
+            background: #ecfdf5;
+
+            color: #047857;
+
+            border: 1px solid #a7f3d0;
+        }
+
+        .alert-error,
+        .alert-danger {
+            background: #fef2f2;
+
+            color: #b91c1c;
+
+            border: 1px solid #fecaca;
+        }
+
+        .alert-warning {
+            background: #fffbeb;
+
+            color: #b45309;
+
+            border: 1px solid #fde68a;
+        }
+
+        .alert-info {
+            background: #eff6ff;
+
+            color: #1d4ed8;
+
+            border: 1px solid #bfdbfe;
+        }
+
+        .security-info {
+            margin-top: 25px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #e5e7eb;
+
+            text-align: center;
+
+            color: #6b7280;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        .security-icon {
+            font-size: 18px;
+
+            margin-bottom: 5px;
+        }
+
+        @media (max-width: 500px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .login-card {
+                padding: 30px 22px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="login-card">
+
+        <!-- Logo -->
+        <div class="logo">
+            DL
+        </div>
+
+
+        <h1>Welcome Back</h1>
+
+        <p class="subtitle">
+            Login to access your Digital Legacy System account.
+        </p>
+
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                {% for category, message in messages %}
+
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            {% endif %}
+
+        {% endwith %}
+
+
+       
+<!-- Login Form -->
+<form
+    method="POST"
+    action="{{ url_for('login') }}"
+    id="loginForm"
+>
+
+    <!-- CSRF Security Token -->
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+
+            <!-- Username -->
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    maxlength="30"
+                    autocomplete="username"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Password -->
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        class="password-input"
+                        placeholder="Enter your password"
+                        maxlength="100"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="eye-btn"
+                        id="togglePassword"
+                        aria-label="Show password"
+                        title="Show password"
+                    >
+                        👁
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Forgot Password -->
+            <div class="form-options">
+
+                <a
+                    href="{{ url_for('forgot_password') }}"
+                    class="forgot-link"
+                >
+                    Forgot Password?
+                </a>
+
+            </div>
+
+
+            <!-- Login Button -->
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginBtn"
+            >
+                Login
+            </button>
+
+        </form>
+
+
+        <!-- Register -->
+        <div class="register-text">
+
+            Don't have an account?
+
+            <a
+                href="{{ url_for('register') }}"
+                class="register-link"
+            >
+                Create Account
+            </a>
+
+        </div>
+
+
+        <!-- Back -->
+        <a
+            href="{{ url_for('home') }}"
+            class="back-link"
+        >
+            ← Back to Home
+        </a>
+
+
+        <!-- Security -->
+        <div class="security-info">
+
+            <div class="security-icon">
+                🔒
+            </div>
+
+            <strong>Secure Login</strong>
+
+            <br>
+
+            Your password is securely protected using
+            password hashing.
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const passwordInput =
+        document.getElementById("password");
+
+    const togglePassword =
+        document.getElementById("togglePassword");
+
+    const loginForm =
+        document.getElementById("loginForm");
+
+    const loginBtn =
+        document.getElementById("loginBtn");
+
+
+    /*
+        Show / Hide Password
+    */
+    togglePassword.addEventListener("click", function () {
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+
+            togglePassword.textContent = "🙈";
+
+            togglePassword.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
+
+            togglePassword.setAttribute(
+                "title",
+                "Hide password"
+            );
+
+        } else {
+
+            passwordInput.type = "password";
+
+            togglePassword.textContent = "👁";
+
+            togglePassword.setAttribute(
+                "aria-label",
+                "Show password"
+            );
+
+            togglePassword.setAttribute(
+                "title",
+                "Show password"
+            );
+
+        }
+
+    });
+
+
+    /*
+        Username validation
+    */
+    loginForm.addEventListener("submit", function (event) {
+
+        const username =
+            document.getElementById("username").value.trim();
+
+        const password =
+            passwordInput.value;
+
+
+        /*
+            Username validation
+        */
+        if (!/^[A-Za-z0-9_]{4,30}$/.test(username)) {
+
+            event.preventDefault();
+
+            alert(
+                "Username must contain 4-30 characters and only letters, numbers, or underscore."
+            );
+
+            document.getElementById("username").focus();
+
+            return;
+        }
+
+
+        /*
+            Password validation
+        */
+        if (password.length < 8) {
+
+            event.preventDefault();
+
+            alert(
+                "Password must contain at least 8 characters."
+            );
+
+            passwordInput.focus();
+
+            return;
+        }
+
+
+        /*
+            Prevent multiple submissions
+        */
+        loginBtn.disabled = true;
+
+        loginBtn.textContent = "Logging in...";
+
+    });
+
+</script>
+
+</body>
+</html>

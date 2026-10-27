@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Legacy Assignment - Digital Legacy System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(124, 58, 237, 0.10), transparent 35%),
+                #f5f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .logout-btn {
+            background: #ef4444;
+            color: white !important;
+            padding: 9px 16px;
+            border-radius: 8px;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
+        }
+
+        /* PAGE */
+
+        .page-container {
+            width: 92%;
+            max-width: 1100px;
+            margin: 40px auto;
+        }
+
+        .page-header {
+            margin-bottom: 28px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #6b7280;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* FLASH MESSAGES */
+
+        .flash-container {
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            padding: 14px 18px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .alert-success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .alert-danger,
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .alert-warning {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+
+        .alert-info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+
+        /* GRID */
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        /* CARD */
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+        }
+
+        .card-header {
+            margin-bottom: 25px;
+        }
+
+        .card-header h2 {
+            font-size: 21px;
+            color: #111827;
+            margin-bottom: 7px;
+        }
+
+        .card-header p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 21px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            color: #374151;
+        }
+
+        .required {
+            color: #ef4444;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            background: #ffffff;
+            color: #111827;
+            font-size: 14px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+        select.form-control {
+            cursor: pointer;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .help-text {
+            margin-top: 7px;
+            color: #6b7280;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* BUTTONS */
+
+        .button-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 12px 20px;
+            border-radius: 9px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            color: #ffffff;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #e5e7eb;
+        }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
+        /* INFORMATION CARD */
+
+        .info-card {
+            background: linear-gradient(145deg, #eff6ff, #f5f3ff);
+            border: 1px solid #dbeafe;
+        }
+
+        .info-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: #2563eb;
+            color: white;
+            font-size: 23px;
+            margin-bottom: 17px;
+        }
+
+        .info-card h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .info-card > p {
+            color: #4b5563;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 14px;
+            color: #374151;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .check {
+            color: #16a34a;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* SECURITY CARD */
+
+        .security-card {
+            margin-top: 20px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 20px;
+        }
+
+        .security-card h3 {
+            font-size: 16px;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .security-card p {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 20px;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 800px) {
+
+            .navbar {
+                padding: 15px 5%;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a:not(.logout-btn) {
+                display: none;
+            }
+
+            .page-container {
+                width: 94%;
+                margin: 25px auto;
+            }
+
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .card {
+                padding: 22px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .logo {
+                font-size: 19px;
+            }
+
+            .button-row {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <a href="{{ url_for('dashboard') }}" class="logo">
+            🔐 Digital Legacy
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('assets') }}">
+                Assets
+            </a>
+
+            <a href="{{ url_for('beneficiaries') }}">
+                Beneficiaries
+            </a>
+
+            <a href="{{ url_for('documents') }}">
+                Documents
+            </a>
+
+            <a href="{{ url_for('legacies') }}">
+                Legacies
+            </a>
+
+            <a href="{{ url_for('logout') }}" class="logout-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="page-container">
+
+        <div class="page-header">
+
+            <h1>
+                Create Legacy Assignment
+            </h1>
+
+            <p>
+                Assign your selected assets and documents to a beneficiary
+                for future access according to your chosen release date.
+            </p>
+
+        </div>
+
+
+        <!-- FLASH MESSAGES -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                <div class="flash-container">
+
+                    {% for category, message in messages %}
+
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <div class="content-grid">
+
+            <!-- FORM CARD -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <h2>
+                        📜 Legacy Details
+                    </h2>
+
+                    <p>
+                        Select who should receive the legacy and
+                        what information should be included.
+                    </p>
+
+                </div>
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for('create_legacy') }}"
+                    id="legacyForm"
+                >
+<!-- CSRF Security Token -->
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <!-- BENEFICIARY -->
+
+                    <div class="form-group">
+
+                        <label for="beneficiary_id">
+                            Beneficiary
+                            <span class="required">*</span>
+                        </label>
+
+                        <select
+                            name="beneficiary_id"
+                            id="beneficiary_id"
+                            class="form-control"
+                            required
+                        >
+
+                            <option value="">
+                                -- Select Beneficiary --
+                            </option>
+
+                            {% for beneficiary in beneficiaries %}
+
+                                <option value="{{ beneficiary.id }}">
+                                    {{ beneficiary.name }}
+                                    {% if beneficiary.relation %}
+                                        ({{ beneficiary.relation }})
+                                    {% endif %}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        <div class="help-text">
+                            Choose the person who will receive the selected legacy information.
+                        </div>
+
+                    </div>
+
+
+                    <!-- ASSET -->
+
+                    <div class="form-group">
+
+                        <label for="asset_id">
+                            Asset
+                        </label>
+
+                        <select
+                            name="asset_id"
+                            id="asset_id"
+                            class="form-control"
+                        >
+
+                            <option value="">
+                                -- No Asset Selected --
+                            </option>
+
+                            {% for asset in assets %}
+
+                                <option value="{{ asset.id }}">
+                                    {{ asset.asset_name }}
+                                    {% if asset.asset_type %}
+                                        - {{ asset.asset_type }}
+                                    {% endif %}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        <div class="help-text">
+                            Select an asset to include in this legacy assignment.
+                            This field is optional.
+                        </div>
+
+                    </div>
+
+
+                    <!-- DOCUMENT -->
+
+                    <div class="form-group">
+
+                        <label for="document_id">
+                            Document
+                        </label>
+
+                        <select
+                            name="document_id"
+                            id="document_id"
+                            class="form-control"
+                        >
+
+                            <option value="">
+                                -- No Document Selected --
+                            </option>
+
+                            {% for document in documents %}
+
+                                <option value="{{ document.id }}">
+                                    {{ document.filename }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                        <div class="help-text">
+                            Select a document to include in this legacy assignment.
+                            This field is optional.
+                        </div>
+
+                    </div>
+
+
+                    <!-- RELEASE DATE -->
+
+                    <div class="form-group">
+
+                        <label for="release_date">
+                            Release Date
+                            <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="datetime-local"
+                            name="release_date"
+                            id="release_date"
+                            class="form-control"
+                            required
+                        >
+
+                        <div class="help-text">
+                            The legacy assignment will be scheduled for this date and time.
+                        </div>
+
+                    </div>
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="button-row">
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+                            🔐 Create Legacy
+                        </button>
+
+                        <a
+                            href="{{ url_for('legacies') }}"
+                            class="btn btn-secondary"
+                        >
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- RIGHT SIDE -->
+
+            <div>
+
+                <!-- INFO CARD -->
+
+                <div class="card info-card">
+
+                    <div class="info-icon">
+                        🔐
+                    </div>
+
+                    <h3>
+                        How Legacy Assignment Works
+                    </h3>
+
+                    <p>
+                        Create a secure assignment that connects your
+                        personal assets or documents with a trusted beneficiary.
+                    </p>
+
+                    <ul class="info-list">
+
+                        <li>
+                            <span class="check">✓</span>
+                            <span>
+                                Select a beneficiary from your saved beneficiaries.
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="check">✓</span>
+                            <span>
+                                Choose an asset or document to include.
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="check">✓</span>
+                            <span>
+                                Set a future release date and time.
+                            </span>
+                        </li>
+
+                        <li>
+                            <span class="check">✓</span>
+                            <span>
+                                Track the assignment from the Legacies page.
+                            </span>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- SECURITY CARD -->
+
+                <div class="security-card">
+
+                    <h3>
+                        🛡️ Security Reminder
+                    </h3>
+
+                    <p>
+                        Only create legacy assignments for people you trust.
+                        Review the beneficiary, asset, document and release
+                        date carefully before creating the assignment.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        © 2026 Digital Legacy System.
+        Secure your digital future.
+
+    </footer>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        const form = document.getElementById("legacyForm");
+
+        const releaseDate =
+            document.getElementById("release_date");
+
+        /*
+         * Set minimum release date to the current date/time.
+         * This prevents selecting a date in the past.
+         */
+
+        function setMinimumDate() {
+
+            const now = new Date();
+
+            const year = now.getFullYear();
+
+            const month = String(
+                now.getMonth() + 1
+            ).padStart(2, "0");
+
+            const day = String(
+                now.getDate()
+            ).padStart(2, "0");
+
+            const hours = String(
+                now.getHours()
+            ).padStart(2, "0");
+
+            const minutes = String(
+                now.getMinutes()
+            ).padStart(2, "0");
+
+            const minimum =
+                `${year}-${month}-${day}T${hours}:${minutes}`;
+
+            releaseDate.min = minimum;
+        }
+
+        setMinimumDate();
+
+
+        /*
+         * Form validation
+         */
+
+        form.addEventListener("submit", function(event) {
+
+            const beneficiary =
+                document.getElementById("beneficiary_id").value;
+
+            const selectedDate =
+                releaseDate.value;
+
+            if (!beneficiary) {
+
+                alert(
+                    "Please select a beneficiary."
+                );
+
+                event.preventDefault();
+
+                return;
+            }
+
+            if (!selectedDate) {
+
+                alert(
+                    "Please select a release date."
+                );
+
+                event.preventDefault();
+
+                return;
+            }
+
+            const selected =
+                new Date(selectedDate);
+
+            const now =
+                new Date();
+
+            if (selected <= now) {
+
+                alert(
+                    "Release date must be in the future."
+                );
+
+                event.preventDefault();
+
+                return;
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>

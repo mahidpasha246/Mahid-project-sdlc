@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Upload Document - Digital Legacy System</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    #dbeafe 0%,
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom right,
+                    #ede9fe 0%,
+                    transparent 35%
+                ),
+                #f8fafc;
+
+            color: #1e293b;
+        }
+
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            width: 100%;
+
+            background: rgba(255, 255, 255, 0.96);
+
+            border-bottom: 1px solid #e2e8f0;
+
+            padding: 16px 6%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 100;
+
+            box-shadow:
+                0 4px 20px rgba(15, 23, 42, 0.05);
+        }
+
+
+        .logo {
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-size: 22px;
+
+            font-weight: 800;
+        }
+
+
+        .nav-links {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .nav-links a {
+            text-decoration: none;
+
+            color: #475569;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            padding: 9px 13px;
+
+            border-radius: 8px;
+
+            transition: 0.2s;
+        }
+
+
+        .nav-links a:hover {
+            background: #eff6ff;
+
+            color: #2563eb;
+        }
+
+
+        .logout {
+            color: #dc2626 !important;
+        }
+
+
+        .logout:hover {
+            background: #fef2f2 !important;
+
+            color: #b91c1c !important;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 92%;
+
+            max-width: 850px;
+
+            margin: 45px auto;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        .page-header {
+            margin-bottom: 25px;
+        }
+
+
+        .back-link {
+            display: inline-block;
+
+            color: #2563eb;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            margin-bottom: 15px;
+        }
+
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+
+        .page-header h1 {
+            color: #0f172a;
+
+            font-size: 32px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .page-header p {
+            color: #64748b;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+        }
+
+
+        /* ================= FLASH ================= */
+
+        .flash-container {
+            margin-bottom: 20px;
+        }
+
+
+        .flash {
+            padding: 13px 16px;
+
+            border-radius: 10px;
+
+            margin-bottom: 10px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        .success {
+            background: #dcfce7;
+
+            color: #166534;
+
+            border: 1px solid #bbf7d0;
+        }
+
+
+        .error {
+            background: #fee2e2;
+
+            color: #991b1b;
+
+            border: 1px solid #fecaca;
+        }
+
+
+        .warning {
+            background: #fef3c7;
+
+            color: #92400e;
+
+            border: 1px solid #fde68a;
+        }
+
+
+        .info {
+            background: #dbeafe;
+
+            color: #1e40af;
+
+            border: 1px solid #bfdbfe;
+        }
+
+
+        /* ================= FORM CARD ================= */
+
+        .form-card {
+            background: rgba(255, 255, 255, 0.97);
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 18px;
+
+            padding: 32px;
+
+            box-shadow:
+                0 10px 35px rgba(15, 23, 42, 0.07);
+        }
+
+
+        .card-heading {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            margin-bottom: 28px;
+
+            padding-bottom: 20px;
+
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+
+        .icon-box {
+            width: 52px;
+
+            height: 52px;
+
+            border-radius: 13px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 25px;
+
+            flex-shrink: 0;
+        }
+
+
+        .card-heading h2 {
+            color: #0f172a;
+
+            font-size: 20px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .card-heading p {
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= FORM ================= */
+
+        .form-group {
+            margin-bottom: 23px;
+        }
+
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #334155;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+
+        .required {
+            color: #dc2626;
+        }
+
+
+        .input {
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 9px;
+
+            background: white;
+
+            color: #1e293b;
+
+            font-size: 14px;
+
+            outline: none;
+
+            transition: 0.2s;
+        }
+
+
+        .input:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+
+        /* ================= FILE UPLOAD ================= */
+
+        .file-area {
+            position: relative;
+
+            border: 2px dashed #bfdbfe;
+
+            border-radius: 14px;
+
+            background: #f8fbff;
+
+            padding: 35px 20px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+
+        .file-area:hover {
+            border-color: #2563eb;
+
+            background: #eff6ff;
+        }
+
+
+        .file-area.dragover {
+            border-color: #2563eb;
+
+            background: #dbeafe;
+
+            transform: scale(1.01);
+        }
+
+
+        .file-icon {
+            font-size: 42px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .file-area h3 {
+            color: #1e293b;
+
+            font-size: 17px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .file-area p {
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .file-types {
+            color: #94a3b8;
+
+            font-size: 12px;
+        }
+
+
+        #file {
+            display: none;
+        }
+
+
+        .choose-btn {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            padding: 10px 18px;
+
+            border-radius: 8px;
+
+            background: #eff6ff;
+
+            color: #2563eb;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        /* ================= FILE NAME ================= */
+
+        .selected-file {
+            display: none;
+
+            margin-top: 14px;
+
+            padding: 13px 15px;
+
+            border-radius: 9px;
+
+            background: #f1f5f9;
+
+            border: 1px solid #e2e8f0;
+
+            color: #334155;
+
+            font-size: 13px;
+
+            text-align: left;
+        }
+
+
+        .selected-file strong {
+            color: #2563eb;
+        }
+
+
+        /* ================= ERROR ================= */
+
+        .field-error {
+            display: none;
+
+            margin-top: 7px;
+
+            color: #dc2626;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+
+        .invalid {
+            border-color: #dc2626 !important;
+
+            background: #fffafa !important;
+        }
+
+
+        /* ================= LIMIT CARD ================= */
+
+        .limit-card {
+            margin-top: 18px;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 12px;
+
+            padding: 15px;
+
+            background: #fffbeb;
+
+            border: 1px solid #fde68a;
+
+            border-radius: 11px;
+
+            color: #92400e;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        .limit-icon {
+            font-size: 20px;
+
+            flex-shrink: 0;
+        }
+
+
+        /* ================= BUTTONS ================= */
+
+        .buttons {
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 28px;
+
+            padding-top: 23px;
+
+            border-top: 1px solid #e2e8f0;
+        }
+
+
+        .btn {
+            border: none;
+
+            border-radius: 9px;
+
+            padding: 13px 22px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            text-decoration: none;
+
+            text-align: center;
+
+            transition: 0.2s;
+        }
+
+
+        .upload-btn {
+            flex: 1;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #4f46e5
+                );
+
+            box-shadow:
+                0 7px 18px rgba(37, 99, 235, 0.20);
+        }
+
+
+        .upload-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 24px rgba(37, 99, 235, 0.28);
+        }
+
+
+        .cancel-btn {
+            flex: 1;
+
+            background: #f1f5f9;
+
+            color: #475569;
+        }
+
+
+        .cancel-btn:hover {
+            background: #e2e8f0;
+        }
+
+
+        /* ================= SECURITY ================= */
+
+        .security-card {
+            margin-top: 22px;
+
+            padding: 18px;
+
+            border-radius: 12px;
+
+            background: #f0fdf4;
+
+            border: 1px solid #bbf7d0;
+
+            color: #166534;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        .security-card strong {
+            color: #15803d;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            text-align: center;
+
+            padding: 35px 20px;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 14px 4%;
+            }
+
+
+            .nav-links {
+                gap: 2px;
+            }
+
+
+            .nav-links a {
+                font-size: 12px;
+
+                padding: 8px;
+            }
+
+
+            .nav-links a:nth-child(2),
+            .nav-links a:nth-child(3) {
+                display: none;
+            }
+
+
+            .container {
+                width: 94%;
+
+                margin: 30px auto;
+            }
+
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+
+            .form-card {
+                padding: 22px 18px;
+            }
+
+
+            .file-area {
+                padding: 28px 15px;
+            }
+
+
+            .buttons {
+                flex-direction: column;
+            }
+
+
+            .btn {
+                width: 100%;
+            }
+
+        }
+
+
+        @media (max-width: 450px) {
+
+            .logo {
+                font-size: 18px;
+            }
+
+
+            .card-heading h2 {
+                font-size: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <a
+            href="{{ url_for('dashboard') }}"
+            class="logo"
+        >
+            🔐 Digital Legacy
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="{{ url_for('assets') }}">
+                Assets
+            </a>
+
+            <a href="{{ url_for('profile') }}">
+                Profile
+            </a>
+
+            <a
+                href="{{ url_for('logout') }}"
+                class="logout"
+            >
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <div class="page-header">
+
+            <a
+                href="{{ url_for('documents') }}"
+                class="back-link"
+            >
+                ← Back to Documents
+            </a>
+
+
+            <h1>
+                Upload Document
+            </h1>
+
+
+            <p>
+                Securely store an important document in your
+                Digital Legacy account.
+            </p>
+
+        </div>
+
+
+        <!-- ================= FLASH MESSAGES ================= -->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+
+                <div class="flash-container">
+
+                    {% for category, message in messages %}
+
+                        <div class="flash {{ category }}">
+                            {{ message }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- ================= FORM CARD ================= -->
+
+        <div class="form-card">
+
+
+            <div class="card-heading">
+
+                <div class="icon-box">
+                    📄
+                </div>
+
+
+                <div>
+
+                    <h2>
+                        Document Upload
+                    </h2>
+
+                    <p>
+                        Select a file to add it to your legacy records.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= FORM ================= -->
+
+            <form
+                action="{{ url_for('upload_document') }}"
+                method="POST"
+                enctype="multipart/form-data"
+                id="uploadForm"
+            >
+<!-- CSRF Security Token -->
+<input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                <div class="form-group">
+
+
+                    <label for="file">
+                        Choose Document
+                        <span class="required">*</span>
+                    </label>
+
+
+                    <!-- FILE DROP AREA -->
+
+                    <div
+                        class="file-area"
+                        id="fileArea"
+                    >
+
+                        <div class="file-icon">
+                            📤
+                        </div>
+
+
+                        <h3>
+                            Drag & Drop Your File
+                        </h3>
+
+
+                        <p>
+                            or click below to browse your computer
+                        </p>
+
+
+                        <div class="file-types">
+                            PDF, PNG, JPG, JPEG, DOC, DOCX
+                        </div>
+
+
+                        <span class="choose-btn">
+                            Choose File
+                        </span>
+
+
+                        <input
+                            type="file"
+                            id="file"
+                            name="file"
+                            accept=".pdf,.png,.jpg,.jpeg,.doc,.docx"
+                            required
+                        >
+
+
+                        <div
+                            class="selected-file"
+                            id="selectedFile"
+                        >
+
+                            📎
+
+                            <strong>
+                                Selected:
+                            </strong>
+
+                            <span id="fileName">
+                                No file selected
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="field-error"
+                        id="fileError"
+                    >
+                        Please select a valid document.
+                    </div>
+
+
+                </div>
+
+
+                <!-- ================= FILE LIMIT ================= -->
+
+                <div class="limit-card">
+
+                    <div class="limit-icon">
+                        ⚠️
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Upload Requirements
+                        </strong>
+
+                        <br>
+
+                        Maximum file size:
+                        <strong>10 MB</strong>
+
+                        <br>
+
+                        Allowed formats:
+                        PDF, PNG, JPG, JPEG, DOC and DOCX.
+
+                    </div>
+
+                </div>
+
+
+                <!-- ================= BUTTONS ================= -->
+
+                <div class="buttons">
+
+
+                    <a
+                        href="{{ url_for('documents') }}"
+                        class="btn cancel-btn"
+                    >
+                        Cancel
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="btn upload-btn"
+                    >
+                        📤 Upload Document
+                    </button>
+
+
+                </div>
+
+
+            </form>
+
+
+            <!-- ================= SECURITY ================= -->
+
+            <div class="security-card">
+
+                🔒
+
+                <strong>
+                    Security Reminder:
+                </strong>
+
+                Only upload documents that belong to you.
+                Your uploaded documents are associated with
+                your Digital Legacy account.
+
+            </div>
+
+
+        </div>
+
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        © 2026 Digital Legacy System.
+        All rights reserved.
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        const fileInput =
+            document.getElementById("file");
+
+        const fileArea =
+            document.getElementById("fileArea");
+
+        const selectedFile =
+            document.getElementById("selectedFile");
+
+        const fileName =
+            document.getElementById("fileName");
+
+        const fileError =
+            document.getElementById("fileError");
+
+        const form =
+            document.getElementById("uploadForm");
+
+
+        /* ================= ALLOWED TYPES ================= */
+
+        const allowedExtensions = [
+            "pdf",
+            "png",
+            "jpg",
+            "jpeg",
+            "doc",
+            "docx"
+        ];
+
+
+        /* ================= MAX SIZE ================= */
+
+        const maxSize =
+            10 * 1024 * 1024;
+
+
+        /* ================= VALIDATE FILE ================= */
+
+        function validateFile() {
+
+            const file =
+                fileInput.files[0];
+
+
+            if (!file) {
+
+                fileInput.classList.add("invalid");
+
+                fileError.style.display = "block";
+
+                return false;
+            }
+
+
+            const fileExtension =
+                file.name
+                    .split(".")
+                    .pop()
+                    .toLowerCase();
+
+
+            if (
+                !allowedExtensions.includes(
+                    fileExtension
+                )
+            ) {
+
+                fileInput.classList.add("invalid");
+
+                fileError.textContent =
+                    "Invalid file format. Please select PDF, PNG, JPG, JPEG, DOC or DOCX.";
+
+                fileError.style.display = "block";
+
+                return false;
+            }
+
+
+            if (file.size > maxSize) {
+
+                fileInput.classList.add("invalid");
+
+                fileError.textContent =
+                    "File is too large. Maximum allowed size is 10 MB.";
+
+                fileError.style.display = "block";
+
+                return false;
+            }
+
+
+            fileInput.classList.remove("invalid");
+
+            fileError.style.display = "none";
+
+            return true;
+        }
+
+
+        /* ================= SHOW FILE ================= */
+
+        fileInput.addEventListener(
+            "change",
+            function() {
+
+                const file =
+                    fileInput.files[0];
+
+
+                if (!file) {
+
+                    selectedFile.style.display =
+                        "none";
+
+                    return;
+                }
+
+
+                fileName.textContent =
+                    file.name;
+
+
+                selectedFile.style.display =
+                    "block";
+
+
+                validateFile();
+
+            }
+        );
+
+
+        /* ================= CLICK AREA ================= */
+
+        fileArea.addEventListener(
+            "click",
+            function(event) {
+
+                if (
+                    event.target !== fileInput
+                ) {
+
+                    fileInput.click();
+
+                }
+
+            }
+        );
+
+
+        /* ================= DRAG OVER ================= */
+
+        fileArea.addEventListener(
+            "dragover",
+            function(event) {
+
+                event.preventDefault();
+
+                fileArea.classList.add(
+                    "dragover"
+                );
+
+            }
+        );
+
+
+        /* ================= DRAG LEAVE ================= */
+
+        fileArea.addEventListener(
+            "dragleave",
+            function() {
+
+                fileArea.classList.remove(
+                    "dragover"
+                );
+
+            }
+        );
+
+
+        /* ================= DROP ================= */
+
+        fileArea.addEventListener(
+            "drop",
+            function(event) {
+
+                event.preventDefault();
+
+
+                fileArea.classList.remove(
+                    "dragover"
+                );
+
+
+                const files =
+                    event.dataTransfer.files;
+
+
+                if (files.length > 0) {
+
+                    fileInput.files =
+                        files;
+
+
+                    const file =
+                        files[0];
+
+
+                    fileName.textContent =
+                        file.name;
+
+
+                    selectedFile.style.display =
+                        "block";
+
+
+                    validateFile();
+
+                }
+
+            }
+        );
+
+
+        /* ================= SUBMIT ================= */
+
+        form.addEventListener(
+            "submit",
+            function(event) {
+
+                if (!validateFile()) {
+
+                    event.preventDefault();
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Digital Legacy System - Securely manage your digital assets, beneficiaries and important documents.">
+
+    <title>Digital Legacy System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f9fc;
+            color: #172033;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        .navbar {
+            width: 100%;
+            background: #ffffff;
+            border-bottom: 1px solid #e7ebf2;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 16px 25px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            text-decoration: none;
+            color: #172033;
+            font-size: 21px;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white;
+            font-size: 21px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #566176;
+            font-size: 15px;
+            font-weight: 600;
+
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .login-btn {
+            padding: 10px 20px;
+            border-radius: 9px;
+
+            background: #2563eb !important;
+            color: white !important;
+        }
+
+        .login-btn:hover {
+            background: #1d4ed8 !important;
+        }
+
+        .register-btn {
+            padding: 10px 20px;
+            border-radius: 9px;
+
+            border: 1px solid #2563eb;
+            color: #2563eb !important;
+        }
+
+        .register-btn:hover {
+            background: #eff6ff;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            min-height: 650px;
+
+            display: flex;
+            align-items: center;
+
+            background:
+                radial-gradient(circle at 80% 20%, #dbeafe 0, transparent 35%),
+                radial-gradient(circle at 10% 90%, #e0e7ff 0, transparent 30%),
+                #f8fbff;
+        }
+
+        .hero-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 80px 25px;
+
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 54px;
+            line-height: 1.12;
+            margin-bottom: 22px;
+            color: #111827;
+        }
+
+        .hero-content h1 span {
+            color: #2563eb;
+        }
+
+        .hero-content p {
+            max-width: 620px;
+            color: #667085;
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 14px 24px;
+            border-radius: 10px;
+
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 700;
+
+            transition: 0.2s;
+        }
+
+        .primary-btn {
+            background: #2563eb;
+            color: white;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+        }
+
+        .primary-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            background: white;
+            color: #2563eb;
+            border: 1px solid #d7deea;
+        }
+
+        .secondary-btn:hover {
+            background: #f8fafc;
+            transform: translateY(-2px);
+        }
+
+        /* =========================
+           HERO CARD
+        ========================== */
+
+        .hero-card {
+            background: white;
+            border: 1px solid #e4e9f1;
+            border-radius: 22px;
+
+            padding: 32px;
+
+            box-shadow: 0 25px 60px rgba(15, 23, 42, 0.10);
+        }
+
+        .security-icon {
+            width: 70px;
+            height: 70px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 20px;
+
+            background: #eff6ff;
+            color: #2563eb;
+
+            font-size: 34px;
+            margin-bottom: 22px;
+        }
+
+        .hero-card h2 {
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .hero-card p {
+            color: #667085;
+            margin-bottom: 24px;
+            font-size: 15px;
+        }
+
+        .security-list {
+            list-style: none;
+        }
+
+        .security-list li {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+
+            margin: 15px 0;
+
+            color: #344054;
+            font-size: 14px;
+        }
+
+        .check {
+            width: 24px;
+            height: 24px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #dcfce7;
+            color: #15803d;
+
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        /* =========================
+           FEATURES
+        ========================== */
+
+        .features {
+            padding: 85px 25px;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 12px;
+            color: #111827;
+        }
+
+        .section-title p {
+            color: #667085;
+            font-size: 16px;
+        }
+
+        .feature-grid {
+            max-width: 1200px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .feature-card {
+            padding: 28px;
+
+            border: 1px solid #e6eaf0;
+            border-radius: 16px;
+
+            background: #ffffff;
+
+            transition: 0.25s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.08);
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: #eff6ff;
+            color: #2563eb;
+
+            font-size: 23px;
+
+            margin-bottom: 18px;
+        }
+
+        .feature-card h3 {
+            font-size: 19px;
+            margin-bottom: 9px;
+        }
+
+        .feature-card p {
+            color: #667085;
+            font-size: 14px;
+        }
+
+        /* =========================
+           HOW IT WORKS
+        ========================== */
+
+        .how-it-works {
+            padding: 85px 25px;
+            background: #f8fafc;
+        }
+
+        .steps {
+            max-width: 1000px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 17px;
+
+            border-radius: 50%;
+
+            background: #2563eb;
+            color: white;
+
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .step h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #667085;
+            font-size: 13px;
+        }
+
+        /* =========================
+           CTA
+        ========================== */
+
+        .cta {
+            padding: 75px 25px;
+            background: #111827;
+            color: white;
+        }
+
+        .cta-container {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #cbd5e1;
+            margin-bottom: 28px;
+        }
+
+        .cta .primary-btn {
+            background: #3b82f6;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            background: #0b1120;
+            color: #94a3b8;
+            padding: 25px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .footer-brand {
+            color: white;
+            font-weight: 700;
+        }
+
+        .footer-text {
+            font-size: 13px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 900px) {
+
+            .hero-container {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .steps {
+                grid-template-columns: repeat(2, 1fr);
+                row-gap: 35px;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .nav-container {
+                padding: 13px 17px;
+            }
+
+            .nav-links {
+                gap: 8px;
+            }
+
+            .nav-links a:not(.login-btn):not(.register-btn) {
+                display: none;
+            }
+
+            .login-btn,
+            .register-btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .logo {
+                font-size: 17px;
+            }
+
+            .logo-icon {
+                width: 36px;
+                height: 36px;
+            }
+
+            .hero {
+                min-height: auto;
+            }
+
+            .hero-container {
+                padding: 60px 18px;
+                gap: 35px;
+            }
+
+            .hero-content h1 {
+                font-size: 38px;
+            }
+
+            .hero-content p {
+                font-size: 16px;
+            }
+
+            .hero-card {
+                padding: 24px;
+            }
+
+            .section-title h2 {
+                font-size: 29px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .cta h2 {
+                font-size: 29px;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="{{ url_for('home') }}" class="logo">
+
+                <span class="logo-icon">🔐</span>
+
+                <span>Digital Legacy</span>
+
+            </a>
+
+            <div class="nav-links">
+
+                <a href="#features">Features</a>
+
+                <a href="#how-it-works">How It Works</a>
+
+                <a href="{{ url_for('login') }}" class="login-btn">
+                    Login
+                </a>
+
+                <a href="{{ url_for('register') }}" class="register-btn">
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
+
+    <section class="hero">
+
+        <div class="hero-container">
+
+            <div class="hero-content">
+
+                <h1>
+                    Secure Your
+                    <span>Digital Legacy</span>
+                </h1>
+
+                <p>
+                    Safely organize your digital assets, important
+                    documents and beneficiaries in one secure place.
+                    Make sure your important information is protected
+                    and available when it matters most.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="{{ url_for('register') }}"
+                       class="primary-btn">
+                        Get Started →
+                    </a>
+
+                    <a href="#features"
+                       class="secondary-btn">
+                        Learn More
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-card">
+
+                <div class="security-icon">
+                    🔒
+                </div>
+
+                <h2>
+                    Your Information, Protected
+                </h2>
+
+                <p>
+                    Digital Legacy System helps you securely manage
+                    and organize your important digital information.
+                </p>
+
+                <ul class="security-list">
+
+                    <li>
+                        <span class="check">✓</span>
+                        Secure user accounts
+                    </li>
+
+                    <li>
+                        <span class="check">✓</span>
+                        Manage digital assets
+                    </li>
+
+                    <li>
+                        <span class="check">✓</span>
+                        Store important documents
+                    </li>
+
+                    <li>
+                        <span class="check">✓</span>
+                        Manage beneficiaries
+                    </li>
+
+                    <li>
+                        <span class="check">✓</span>
+                        Create legacy assignments
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FEATURES
+    ========================== -->
+
+    <section class="features" id="features">
+
+        <div class="section-title">
+
+            <h2>
+                Everything You Need
+            </h2>
+
+            <p>
+                Manage your digital legacy through a simple
+                and organized system.
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    👤
+                </div>
+
+                <h3>
+                    User Account
+                </h3>
+
+                <p>
+                    Create a secure personal account and manage
+                    your profile information.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    💼
+                </div>
+
+                <h3>
+                    Digital Assets
+                </h3>
+
+                <p>
+                    Add and manage important digital assets
+                    and their descriptions.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    👨‍👩‍👧
+                </div>
+
+                <h3>
+                    Beneficiaries
+                </h3>
+
+                <p>
+                    Store beneficiary information and assign
+                    important assets to them.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📄
+                </div>
+
+                <h3>
+                    Documents
+                </h3>
+
+                <p>
+                    Upload and manage important PDF, image and
+                    document files.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🗂️
+                </div>
+
+                <h3>
+                    Legacy Management
+                </h3>
+
+                <p>
+                    Create legacy assignments with beneficiaries,
+                    assets and release dates.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🛡️
+                </div>
+
+                <h3>
+                    Activity Tracking
+                </h3>
+
+                <p>
+                    Keep track of important account and system
+                    activities.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================== -->
+
+    <section class="how-it-works" id="how-it-works">
+
+        <div class="section-title">
+
+            <h2>
+                How It Works
+            </h2>
+
+            <p>
+                Follow these simple steps to manage your digital legacy.
+            </p>
+
+        </div>
+
+
+        <div class="steps">
+
+            <div class="step">
+
+                <div class="step-number">
+                    1
+                </div>
+
+                <h3>
+                    Create Account
+                </h3>
+
+                <p>
+                    Register your account with your personal details.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    2
+                </div>
+
+                <h3>
+                    Add Information
+                </h3>
+
+                <p>
+                    Add assets, beneficiaries and important documents.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    3
+                </div>
+
+                <h3>
+                    Create Legacy
+                </h3>
+
+                <p>
+                    Assign assets and documents to your beneficiaries.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    4
+                </div>
+
+                <h3>
+                    Manage Securely
+                </h3>
+
+                <p>
+                    Monitor your information through your dashboard.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+
+    <section class="cta">
+
+        <div class="cta-container">
+
+            <h2>
+                Start Managing Your Digital Legacy
+            </h2>
+
+            <p>
+                Create your account and securely organize your
+                important digital information.
+            </p>
+
+            <a href="{{ url_for('register') }}"
+               class="primary-btn">
+                Create Your Account →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                🔐 Digital Legacy System
+            </div>
+
+            <div class="footer-text">
+                © 2026 Digital Legacy System. All rights reserved.
+            </div>
+
+        </div>
+
+    </footer>
+
+
+</body>
+</html>
